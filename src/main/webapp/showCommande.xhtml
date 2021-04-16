@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<h:head><link rel="stylesheet" href="style.css"></link></h:head> 
+<h:body> 
+
+	<p:layout fullPage="true">
+		
+		<ui:include src="layoutUnitMenu.xhtml" />
+		
+		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
+		<h:form>
+			<center>			
+			<p:panel id="panel" header="Section Recherche par Etat" styleClass="p-mb-3">
+            		<p:growl id="messages"/>
+
+            <h:panelGrid columns="2" cellpadding="7">
+            
+                <h:outputText value="Etat commande" />
+			 <p:selectOneMenu value="#{commandeMBean.valeurRecherche}">
+                    <f:selectItem itemLabel="Annuler" itemValue="0"/>
+                    <f:selectItem itemLabel="En cours" itemValue="1"/>
+                    <f:selectItem itemLabel="Livré" itemValue="2"/>
+                </p:selectOneMenu>
+
+                <p:message for="@previous"/>
+                <h:commandButton value="Recherche" actionListener="#{commandeMBean.findByEtat}"/>
+                
+            </h:panelGrid>
+        </p:panel>
+            </center>
+			</h:form>
+			<h:form>
+			<center>			
+			<p:panel id="panel" header="Section Recherche par Date" styleClass="p-mb-3">
+            		<p:growl id="messages"/>
+
+            <h:panelGrid columns="2" cellpadding="7">
+            
+                <h:outputLabel for="dateDebut" value="Date debut :"/>
+                <p:calendar id="dateDebut" value="#{commandeMBean.dateDebut}" required="true">
+                </p:calendar>
+				 <h:outputLabel for="dateFin" value="Date fin :"/>
+                <p:calendar id="dateFin" value="#{commandeMBean.dateFin}" required="true">
+                </p:calendar>
+                <p:message for="@previous"/>
+                <h:commandButton value="Recherche" actionListener="#{commandeMBean.findByDate()}"/>
+                
+            </h:panelGrid>
+        </p:panel>
+            </center>
+			</h:form>
+	<h:form>
+		<p:growl showDetail="true"></p:growl>
+		<p:dataTable value="#{commandeMBean.listCommande}" var="commande" selection="#{commandeMBean.selectedCommande}" selectionMode="single" rowKey="#{commande.id}">
+			<p:column headerText="Client">
+				<h:outputText value="#{commande.client.nomclient}" />
+			</p:column>
+			
+			<p:column headerText="Id Produit">
+				<h:outputText value="#{commande.id.idproduit}" />
+			</p:column>
+			
+			<p:column headerText="Date commande">
+				<h:outputText value="#{commande.datecommande}" />
+			</p:column>
+			
+			<p:column headerText="Etat commande">
+				<h:outputText value="#{commande.etat.nometat}" />
+			</p:column>
+			
+			<p:column headerText="Quantité commande">
+				<h:outputText value="#{commande.qtecommande}" />
+			</p:column>
+			
+			<p:column headerText="Supprimer">
+				<h:commandButton actionListener="#{commandeMBean.deleteCommande}" value="Supprimer" />
+			</p:column>
+			
+			<p:column headerText="Editer">
+			<h:commandButton action="#{commandeMBean.editCommande}" value="Editer" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

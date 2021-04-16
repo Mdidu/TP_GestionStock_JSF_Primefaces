@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<h:head><link rel="stylesheet" href="style.css"></link></h:head> 
+<h:body> 
+
+	<p:layout fullPage="true">
+
+		<ui:include src="layoutUnitMenu.xhtml" />
+
+		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
+	
+	<h:form>
+
+		<p:growl></p:growl>
+
+		<h:panelGrid columns="2">
+
+			<h:outputText value="Client" />
+			<p:selectOneMenu value="#{commandeMBean.commande.client.idclient}">
+				<f:selectItems value="#{clientMBean.listClient}" var="client" itemLabel="#{client.nomclient}" itemValue="#{client.idclient}" ></f:selectItems>
+			</p:selectOneMenu>
+			
+			<h:outputText value="Produit" />
+			<p:selectOneMenu value="#{commandeMBean.commande.produit.idproduit}">
+				<f:selectItems value="#{produitMBean.listProduit}" var="produit" itemLabel="#{produit.marqueproduit}" itemValue="#{produit.idproduit}" ></f:selectItems>
+			</p:selectOneMenu>
+			
+			<h:outputText value="Date commande" />
+			<p:calendar value="#{commandeMBean.commande.datecommande}"></p:calendar>
+
+			<h:outputText value="Quantité commande" />
+			<p:inputText value="#{commandeMBean.commande.qtecommande}"></p:inputText>
+					
+			<h:commandButton actionListener="#{commandeMBean.addCommande}"
+						value="Ajouter"></h:commandButton>
+
+		</h:panelGrid>
+	</h:form>
+	</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

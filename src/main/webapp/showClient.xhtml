@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head><link rel="stylesheet" href="style.css"></link></h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+		
+		<ui:include src="layoutUnitMenu.xhtml" />
+		
+		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
+			<h:form>
+			<center>			
+			<p:panel id="panel" header="Section Recherche" styleClass="p-mb-3">
+            		<p:growl id="messages"/>
+
+            <h:panelGrid columns="2" cellpadding="7">
+            
+                <h:outputLabel for="valeurRecherche" value="Champ de recherche :"/>
+                <p:inputText id="valeurRecherche" value="#{clientMBean.valeurRecherche}" >
+                </p:inputText>
+
+                <h:outputLabel for="critereRecherche" value="Critere :"/>
+                <p:selectOneMenu id="critereRecherche" value="#{clientMBean.critereRecherche}" required="true" label="critereRecherche">
+                    <f:selectItem itemLabel="None" itemValue="0"/>
+                    <f:selectItem itemLabel="Nom" itemValue="1"/>
+                    <f:selectItem itemLabel="Prenom" itemValue="2"/>
+                </p:selectOneMenu>
+                <p:message for="@previous"/>
+                <h:commandButton value="Recherche" actionListener="#{clientMBean.renvoi}"/>
+                
+            </h:panelGrid>
+        </p:panel>
+            </center>
+			</h:form>
+			
+			<h:form>
+			 <p:growl showDetail="true"></p:growl>
+				<p:dataTable value="#{clientMBean.listClient}" var="client"
+					selection="#{clientMBean.selectedClient}" selectionMode="single"
+					rowKey="#{client.idclient}">
+
+					<p:column headerText="Id">
+						<h:outputText value="#{client.idclient}" />
+					</p:column>
+					<p:column headerText="Civilité">
+						<h:outputText value="#{client.civiliteclient}" />
+					</p:column>
+					<p:column headerText="Nom">
+						<h:outputText value="#{client.nomclient}" />
+					</p:column>
+					<p:column headerText="Prenom">
+						<h:outputText value="#{client.prenomclient}" />
+					</p:column>
+				
+					<p:column headerText="Date de naissance">
+						<h:outputText value="#{client.datenaissanceclient}" />
+					</p:column>
+					<p:column headerText="N° rue">
+						<h:outputText value="#{client.adresse.numeroadresse}" />
+					</p:column>
+					<p:column headerText="nom rue">
+						<h:outputText value="#{client.adresse.rueadresse}" />
+					</p:column>
+					<p:column headerText="Ville">
+						<h:outputText value="#{client.adresse.villeadresse}" />
+					</p:column>
+					<p:column headerText="Code Postal">
+						<h:outputText value="#{client.adresse.cpadresse}" />
+					</p:column>
+					<p:column headerText="telephone">
+						<h:outputText value="#{client.telclient}" />
+					</p:column>
+					<p:column headerText="email">
+						<h:outputText value="#{client.emailclient}" />
+					</p:column>
+					
+					
+					<p:column headerText="Supprimer">
+						<h:commandButton actionListener="#{clientMBean.deleteClient}"
+							value="Suppr" />
+					</p:column>
+					<p:column headerText="Editer">
+						<h:commandButton action="#{clientMBean.editClient}"
+							value="Edit" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+
+
+</h:body>
+
+</html>

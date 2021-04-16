@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="GESTION" match-name="ADRESSE"/>
+  <table-filter match-schema="GESTION" match-name="CATEGORIE"/>
+  <table-filter match-schema="GESTION" match-name="CLIENT"/>
+  <table-filter match-schema="GESTION" match-name="COMMANDE"/>
+  <table-filter match-schema="GESTION" match-name="ETAT"/>
+  <table-filter match-schema="GESTION" match-name="PRODUIT"/>
+  <table-filter match-schema="GESTION" match-name="ROLE"/>
+  <table-filter match-schema="GESTION" match-name="STOCKUSER"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+
+#menu ul li {
+	display: inline;
+	padding-left: 3%;
+		}
+ul {
+	text-align: center;
+}
+.item-border {
+	border-right: 1px solid black;
+	padding-right: 3%;
+		}
+#layoutcenter {
+	text-align: center;
+}
+#copyright {
+	float: right;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="style/style.css"></link>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+	
+		<ui:include src="layoutUnitMenu.xhtml" />
+		
+		<p:layoutUnit position="center" id="layoutUnit-center">
+			<h1>Liste des utilisateurs</h1>
+			<h:form>
+			 <p:growl showDetail="true"></p:growl>
+				<p:dataTable value="#{userMBean.listUsers}" var="user"
+					selection="#{userMBean.selectedUser}" selectionMode="single"
+					rowKey="#{user.iduser}">
+
+					<p:column headerText="Login">
+						<h:outputText value="#{user.login}" />
+					</p:column>
+					
+					<p:column headerText="Rôle">
+						<h:outputText value="#{user.role.typerole}" />
+					</p:column>
+					
+					<p:column headerText="Supprimer">
+						<h:commandButton actionListener="#{userMBean.deleteUser}"
+							value="Suppr" />
+					</p:column>
+					<p:column headerText="Editer">
+						<h:commandButton action="#{userMBean.editUser}"
+							value="Edit" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+
+
+</h:body>
+
+</html>

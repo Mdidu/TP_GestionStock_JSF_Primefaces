@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="style/style.css"></link>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+	
+		<ui:include src="layoutUnitMenu.xhtml" />
+		
+		<p:layoutUnit position="center" id="layoutUnit-center">
+			<h2>Connexion</h2>
+			
+			<h:form>
+				<p:growl showDetail="true"></p:growl>
+				
+				<p:panel header="Authentification">
+				
+					<p:panelGrid columns="2">
+						<h:outputText value="Login" />
+						<p:inputText value="#{userMBean.user.login}" required="true" requiredMessage="Champ obligatoire"/>
+						
+						<h:outputText value="Password" />
+						<p:password value="#{userMBean.user.password}" required="true" requiredMessage="Champ obligatoire" />
+						<h:commandButton value="Login" action="#{userMBean.login}"/>
+						<h:commandButton type="reset" value="Annuler" />
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+			
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

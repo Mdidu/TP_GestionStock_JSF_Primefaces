@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<h:head><link rel="stylesheet" href="style.css"></link></h:head> 
+<h:body> 
+
+	<p:layout fullPage="true">
+
+		<ui:include src="layoutUnitMenu.xhtml" />
+
+		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
+	
+	<h:form>
+
+		<p:growl></p:growl>
+
+		<h:panelGrid columns="2">
+
+
+			<h:outputText value="Nom Client" />
+			<h:outputText value="#{commandeMBean.selectedCommande.client.nomclient}" />
+			
+			<h:outputText value="Id Produit" />
+			<h:outputText value="#{commandeMBean.selectedCommande.produit.marqueproduit}" />
+			
+			<h:outputText value="Date commande" />
+			<p:calendar value="#{commandeMBean.selectedCommande.datecommande}"></p:calendar>
+					
+			<h:outputText value="Etat commande" />
+			 <p:selectOneMenu value="#{commandeMBean.selectedCommande.etat.idetat}">
+                    <f:selectItem itemLabel="Annuler" itemValue="0"/>
+                    <f:selectItem itemLabel="En cours" itemValue="1"/>
+                    <f:selectItem itemLabel="Livré" itemValue="2"/>
+                </p:selectOneMenu>
+                
+			<h:outputText value="Quantité commande" />
+			<p:inputText value="#{commandeMBean.selectedCommande.qtecommande}"></p:inputText>	
+					
+			<h:commandButton actionListener="#{commandeMBean.updateCommande}"
+						value="Modifier"></h:commandButton>
+
+		</h:panelGrid>
+	</h:form>
+	</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
