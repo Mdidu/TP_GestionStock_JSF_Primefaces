@@ -2,7 +2,6 @@ package persistence.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +11,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-import persistence.entities.Categorie;
-import persistence.entities.Client;
 import persistence.entities.Commande;
 import persistence.entities.CommandeId;
 import persistence.entities.Etat;
@@ -21,82 +18,101 @@ import persistence.entities.Produit;
 
 public class CommandeDaoImpl implements CommandeDao {
 
+	Transaction tx;
+	
 	@Override
-	public void add(Commande command) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction tx = session.beginTransaction();
-		session.persist(command);
-		tx.commit();
-		session.close();
+	public void add(Commande commande) {
+		
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+			
+			tx = session.beginTransaction(); 
+			session.save(commande);
+			tx.commit();
+		}
+	}
+
+	@Override
+	public void delete(Commande commande) {
+		
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+			
+			tx = session.beginTransaction(); 
+			session.delete(commande);
+			tx.commit();
+		}
 		
 	}
 
 	@Override
-	public void delete(Commande command) {
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Transaction tx = s.beginTransaction(); 
-		s.delete(command);
-		tx.commit();
-		s.close();
+	public void update(Commande commande) {
 		
-	}
-
-	@Override
-	public void update(Commande command) {
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Transaction tx = s.beginTransaction(); 
-		s.update(command);
-		tx.commit();
-		s.close();
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+			
+			tx = session.beginTransaction(); 
+			session.update(commande);
+			tx.commit();
+		}
 	}
 
 	@Override
 	public List<Commande> findAll() {
-		List<Commande> listeCommande = new ArrayList<Commande>();
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		listeCommande = s.createQuery("from Commande").list();
-		s.close();
+		List<Commande> listeCommande = null;
+		
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+				
+			listeCommande = session.createQuery("from Commande").list();
+		}
 		return listeCommande;
 	}
 
 	@Override
 	public Commande findById(Serializable commande) {
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Commande cmd = s.get(Commande.class,(CommandeId) commande);
-		s.close();
+		Commande cmd = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+			cmd = session.get(Commande.class,(CommandeId) commande);
+		}
 		return cmd;
 	}
 
 	@Override
 	public List<Commande> findByEtat(BigDecimal idetat) {
-		Etat etat = new Etat(idetat,idetat);
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Criteria crt = s.createCriteria(Commande.class);
-		Criterion crt1 = Restrictions.eq("etat", etat);
-		crt.add(crt1);
-		List<Commande> listCommande = crt.list();
-		s.close();
+		Etat etat = new Etat(idetat);
+		List<Commande> listCommande = null;
+		
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+				
+			Criteria criteria = session.createCriteria(Commande.class);
+			Criterion criterion = Restrictions.eq("etat", etat);
+			criteria.add(criterion);
+			listCommande = criteria.list();
+		}
 		return listCommande;
 	}
 	
 	public List<Commande> findByProduit(Produit produit) {
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Criteria crt = s.createCriteria(Commande.class);
-		Criterion crt1 = Restrictions.eq("produit", produit);
-		crt.add(crt1);
-		List<Commande> listCommande = crt.list();
-		s.close();
+		List<Commande> listCommande = null;
+		
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+			Criteria criteria = session.createCriteria(Commande.class);
+			Criterion criterion = Restrictions.eq("produit", produit);
+			criteria.add(criterion);
+			listCommande = criteria.list();
+		}
 		return listCommande;
 	}
 	
 	@Override
 	public List<Commande> findByDate(Date dateDebut,Date dateFin) {
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Criteria crt = s.createCriteria(Commande.class);
-		Criterion crt1 = Restrictions.between("datecommande", dateDebut, dateFin);
-		crt.add(crt1);
-		List<Commande> listCommande = crt.list();
-		s.close();
+		
+		List<Commande> listCommande = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+			Criteria criteria = session.createCriteria(Commande.class);
+			Criterion criterion = Restrictions.between("datecommande", dateDebut, dateFin);
+			criteria.add(criterion);
+			listCommande = criteria.list();
+		}
 		return listCommande;
 	}
 }

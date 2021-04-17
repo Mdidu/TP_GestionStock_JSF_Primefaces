@@ -62,6 +62,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Stockuser findUserByLoginAndPassword(String login, String password) {
+		Stockuser user = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
 			Criteria criteria = session.createCriteria(Stockuser.class);
@@ -70,9 +71,9 @@ public class UserDaoImpl implements UserDao {
 			criteria.add(criterionLogin);
 			criteria.add(criterionPassword);
 			
-			Stockuser user = (Stockuser) criteria.uniqueResult();
-			return user;
+			user = (Stockuser) criteria.uniqueResult();
 		}
+		return user;
 	}
 
 }

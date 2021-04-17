@@ -6,26 +6,19 @@ import java.util.List;
 import org.hibernate.Session;
 
 import persistence.entities.Etat;
-import persistence.entities.Role;
 
 public class EtatDaoImpl implements EtatDao {
 
 	@Override
 	public void add(Etat type) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void delete(Etat type) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void update(Etat type) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -39,7 +32,6 @@ public class EtatDaoImpl implements EtatDao {
 
 	@Override
 	public Etat findById(Serializable o) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

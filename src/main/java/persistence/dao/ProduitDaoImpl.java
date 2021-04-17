@@ -10,15 +10,16 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-import persistence.entities.Categorie;
 import persistence.entities.Produit;
 
 public class ProduitDaoImpl implements ProduitDao{
 	
+	Transaction tx;
+	
 	@Override
     public void add(Produit produit) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.save(produit);
             tx.commit();
         }
@@ -27,7 +28,7 @@ public class ProduitDaoImpl implements ProduitDao{
     @Override
     public void delete(Produit produit) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.delete(produit);
             tx.commit();
         }
@@ -36,7 +37,7 @@ public class ProduitDaoImpl implements ProduitDao{
     @Override
     public void update(Produit produit) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.update(produit);
             tx.commit();
         }
@@ -70,9 +71,9 @@ public class ProduitDaoImpl implements ProduitDao{
             criteria.add(criterion);
             
             listProduits = criteria.list();
-            
-            return listProduits;
         }
+            
+        return listProduits;
     }
 
     @Override
@@ -85,9 +86,9 @@ public class ProduitDaoImpl implements ProduitDao{
             criteria.add(criterion);
             
             listProduits = criteria.list();
-            
-            return listProduits;
         }
+            
+        return listProduits;
     }
     
 }

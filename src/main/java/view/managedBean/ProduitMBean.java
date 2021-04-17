@@ -21,13 +21,13 @@ public class ProduitMBean {
 
 	private Produit produit = new Produit();
 	private Produit selectedProduit = new Produit();
-	ProduitDao produitdao = new ProduitDaoImpl();
+	ProduitDao produitDao = new ProduitDaoImpl();
 	private List<Produit> listProduit = new ArrayList<Produit>();
 	private String valeurRecherche;
 	private String critereRecherche;
 
 	public ProduitMBean() {
-		listProduit = produitdao.findAll();
+		listProduit = produitDao.findAll();
 	}
 
 	public String getValeurRecherche() {
@@ -71,7 +71,7 @@ public class ProduitMBean {
 	}
 
 	public void addProduit(ActionEvent e) {
-		produitdao.add(produit);
+		produitDao.add(produit);
 		produit = new Produit();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succès"));
 	}
@@ -81,7 +81,7 @@ public class ProduitMBean {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucun produit sélectionné"));
 		} else {
-			produitdao.delete(selectedProduit);
+			produitDao.delete(selectedProduit);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectué avec succès"));
 		}
 	}
@@ -97,19 +97,19 @@ public class ProduitMBean {
 	}
 
 	public void updateProduit(ActionEvent e) {
-		produitdao.update(selectedProduit);
+		produitDao.update(selectedProduit);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succès"));
 	}
 
 	public void renvoi(ActionEvent e) {
 		if (critereRecherche.equalsIgnoreCase("none") || critereRecherche == null)
-			this.listProduit = produitdao.findAll();
+			this.listProduit = produitDao.findAll();
 
 		else if (critereRecherche.equalsIgnoreCase("designation"))
-			this.listProduit = produitdao.findByDesignation(valeurRecherche);
+			this.listProduit = produitDao.findByDesignation(valeurRecherche);
 
 		else if (critereRecherche.equalsIgnoreCase("marque"))
-			this.listProduit = produitdao.findByMarque(valeurRecherche);
+			this.listProduit = produitDao.findByMarque(valeurRecherche);
 
 		critereRecherche = null;
 		valeurRecherche = null;

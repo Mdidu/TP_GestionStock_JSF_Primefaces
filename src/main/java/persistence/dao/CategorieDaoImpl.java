@@ -10,10 +10,12 @@ import persistence.entities.Categorie;
 
 public class CategorieDaoImpl implements CategorieDao {
 
+	Transaction tx;
+	
 	@Override
 	public void add(Categorie categorie) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.save(categorie);
             tx.commit();
         }
@@ -22,7 +24,7 @@ public class CategorieDaoImpl implements CategorieDao {
 	@Override
 	public void delete(Categorie categorie) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.delete(categorie);
             tx.commit();
         }

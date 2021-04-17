@@ -21,13 +21,13 @@ public class ClientMBean {
 
 	private Client client = new Client();
 	private Client selectedClient = new Client();
-	ClientDao clidao = new ClientDaoImpl();
+	ClientDao clientDao = new ClientDaoImpl();
 	private List<Client> listClient = new ArrayList<Client>();
 	private String valeurRecherche;
 	private String critereRecherche;
 
 	public ClientMBean() {
-		this.listClient = clidao.findAll();
+		this.listClient = clientDao.findAll();
 	}
 
 	public String getCritereRecherche() {
@@ -39,12 +39,15 @@ public class ClientMBean {
 	}
 
 	public void renvoi(ActionEvent e) {
-		if (critereRecherche.equalsIgnoreCase("0") || critereRecherche == null)
-			this.listClient = clidao.findAll();
-		else if (critereRecherche.equalsIgnoreCase("1"))
-			this.listClient = clidao.findByNom(valeurRecherche);
-		else if (critereRecherche.equalsIgnoreCase("2"))
-			this.listClient = clidao.findByPrenom(valeurRecherche);
+		if (critereRecherche.equalsIgnoreCase("none") || critereRecherche == null)
+			this.listClient = clientDao.findAll();
+		
+		else if (critereRecherche.equalsIgnoreCase("nom"))
+			this.listClient = clientDao.findByNom(valeurRecherche);
+		
+		else if (critereRecherche.equalsIgnoreCase("prenom"))
+			this.listClient = clientDao.findByPrenom(valeurRecherche);
+		
 		critereRecherche = null;
 		valeurRecherche = null;
 	}
@@ -85,7 +88,7 @@ public class ClientMBean {
 		Role role = new Role();
 		role.setIdrole(new BigDecimal(2));
 		client.getStockuser().setRole(role);
-		clidao.add(client);
+		clientDao.add(client);
 		client = new Client();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succès"));
 	}
@@ -95,7 +98,7 @@ public class ClientMBean {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucun  client sélectionné"));
 		else {
-			clidao.delete(selectedClient);
+			clientDao.delete(selectedClient);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectué avec succès"));
 		}
 	}
@@ -105,7 +108,7 @@ public class ClientMBean {
 	}
 
 	public void updateClient(ActionEvent e) {
-		clidao.update(selectedClient);
+		clientDao.update(selectedClient);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succès"));
 	}
 }

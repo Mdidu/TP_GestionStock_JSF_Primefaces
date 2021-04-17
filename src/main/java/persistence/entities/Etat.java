@@ -1,5 +1,5 @@
 package persistence.entities;
-// Generated 15 avr. 2021 à 11:09:42 by Hibernate Tools 4.0.1.Final
+// Generated 15 avr. 2021 ï¿½ 11:09:42 by Hibernate Tools 4.0.1.Final
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -23,6 +23,10 @@ public class Etat implements java.io.Serializable {
 	private Set<Commande> commandes = new HashSet<Commande>(0);
 
 	public Etat() {
+	}
+
+	public Etat(BigDecimal idetat) {
+		this.idetat = idetat;
 	}
 
 	public Etat(BigDecimal idetat, BigDecimal nometat) {

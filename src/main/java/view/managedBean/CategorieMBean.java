@@ -20,7 +20,7 @@ public class CategorieMBean {
 
 	private Categorie categorie = new Categorie();
 	private Categorie selectedCategorie = new Categorie();
-	CategorieDao catedao = new CategorieDaoImpl();
+	CategorieDao categorieDao = new CategorieDaoImpl();
 	private List<Categorie> listCategorie = new ArrayList<Categorie>();
 
 	public Categorie getCategorie() {
@@ -40,7 +40,7 @@ public class CategorieMBean {
 	}
 
 	public List<Categorie> getListCategorie() {
-		listCategorie = catedao.findAll();
+		listCategorie = categorieDao.findAll();
 		return listCategorie;
 	}
 
@@ -49,7 +49,7 @@ public class CategorieMBean {
 	}
 
 	public void addCategorie(ActionEvent e) {
-		catedao.add(categorie);
+		categorieDao.add(categorie);
 		categorie = new Categorie();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succès"));
 	}
@@ -59,7 +59,7 @@ public class CategorieMBean {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucune categorie sélectionné"));
 		} else {
-			catedao.delete(selectedCategorie);
+			categorieDao.delete(selectedCategorie);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectué avec succès"));
 		}
 	}
@@ -75,7 +75,7 @@ public class CategorieMBean {
 	}
 
 	public void updateCategorie(ActionEvent e) {
-		catedao.update(selectedCategorie);
+		categorieDao.update(selectedCategorie);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succès"));
 	}
 }

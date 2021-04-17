@@ -23,21 +23,17 @@
 
 				<h:panelGrid columns="2">
 
-
 					<h:outputText value="Nom Client" />
-					<h:outputText
-						value="#{commandeMBean.selectedCommande.client.nomclient}" />
+					<h:outputText value="#{commandeMBean.selectedCommande.client.nomclient}" />
 
-					<h:outputText value="Id Produit" />
-					<h:outputText
-						value="#{commandeMBean.selectedCommande.produit.marqueproduit}" />
+					<h:outputText value="Marque" />
+					<h:outputText value="#{commandeMBean.selectedCommande.produit.marqueproduit}" />
 
 					<h:outputText value="Date commande" />
 					<p:calendar value="#{commandeMBean.selectedCommande.datecommande}"></p:calendar>
 
 					<h:outputText value="Etat commande" />
-					<p:selectOneMenu
-						value="#{commandeMBean.selectedCommande.etat.idetat}">
+					<p:selectOneMenu value="#{commandeMBean.selectedCommande.etat.idetat}">
 						<f:selectItem itemLabel="Annuler" itemValue="0" />
 						<f:selectItem itemLabel="En cours" itemValue="1" />
 						<f:selectItem itemLabel="Livré" itemValue="2" />
@@ -46,8 +42,7 @@
 					<h:outputText value="Quantité commande" />
 					<p:inputText value="#{commandeMBean.selectedCommande.qtecommande}"></p:inputText>
 
-					<h:commandButton actionListener="#{commandeMBean.updateCommande}"
-						value="Modifier"></h:commandButton>
+					<h:commandButton actionListener="#{commandeMBean.updateCommande}" value="Modifier"></h:commandButton>
 
 				</h:panelGrid>
 			</h:form>

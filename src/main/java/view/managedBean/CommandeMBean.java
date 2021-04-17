@@ -37,8 +37,8 @@ public class CommandeMBean {
 
 	private Commande commande = new Commande();
 	private Commande selectedCommande = new Commande();
-	CommandeDao cmddao = new CommandeDaoImpl();
-	EtatDao etatdao = new EtatDaoImpl();
+	CommandeDao commandeDao = new CommandeDaoImpl();
+	EtatDao etatDao = new EtatDaoImpl();
 	private List<Commande> listCommande = new ArrayList<Commande>();
 	private List<Etat> listEtat = new ArrayList<Etat>();
 	private BigDecimal valeurRecherche;
@@ -57,13 +57,13 @@ public class CommandeMBean {
 	}
 
 	public CommandeMBean() {
-		listCommande = cmddao.findAll();
+		listCommande = commandeDao.findAll();
 		createPieModel();
 		createBarModel();
 	}
 
 	public List<Etat> getListEtat() {
-		this.listEtat = etatdao.findAll();
+		this.listEtat = etatDao.findAll();
 		return listEtat;
 	}
 
@@ -131,7 +131,7 @@ public class CommandeMBean {
 		Etat etat = new Etat();
 		etat.setIdetat(new BigDecimal(1));
 		commande.setEtat(etat);
-		cmddao.add(commande);
+		commandeDao.add(commande);
 		commande = new Commande();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succès"));
 	}
@@ -141,7 +141,7 @@ public class CommandeMBean {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucun  commande sélectionné"));
 		} else {
-			cmddao.delete(selectedCommande);
+			commandeDao.delete(selectedCommande);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectué avec succès"));
 		}
 	}
@@ -158,16 +158,17 @@ public class CommandeMBean {
 	}
 
 	public void updateCommande(ActionEvent e) {
-		cmddao.update(selectedCommande);
+		commandeDao.update(selectedCommande);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succès"));
 	}
 
 	public void findByEtat(ActionEvent e) {
-		this.listCommande = cmddao.findByEtat(valeurRecherche);
+		this.listCommande = commandeDao.findByEtat(valeurRecherche);
 	}
 
 	public void findByDate(ActionEvent e) {
-		this.listCommande = cmddao.findByDate(dateDebut, dateFin);
+		System.out.println(dateDebut);
+		this.listCommande = commandeDao.findByDate(dateDebut, dateFin);
 	}
 
 	private void createPieModel() {
@@ -176,9 +177,9 @@ public class CommandeMBean {
 
 		PieChartDataSet dataSet = new PieChartDataSet();
 		List<Number> values = new ArrayList<>();
-		values.add(cmddao.findByEtat(new BigDecimal(0)).size());
-		values.add(cmddao.findByEtat(new BigDecimal(1)).size());
-		values.add(cmddao.findByEtat(new BigDecimal(2)).size());
+		values.add(commandeDao.findByEtat(new BigDecimal(0)).size());
+		values.add(commandeDao.findByEtat(new BigDecimal(1)).size());
+		values.add(commandeDao.findByEtat(new BigDecimal(2)).size());
 		dataSet.setData(values);
 
 		List<String> bgColors = new ArrayList<>();
@@ -210,7 +211,7 @@ public class CommandeMBean {
 		List<String> labels = new ArrayList<>();
 		int i = 0;
 		for (Produit p : prod.getListProduit()) {
-			values.add(cmddao.findByProduit(p).size());
+			values.add(commandeDao.findByProduit(p).size());
 			bgColor.add("rgba(255, 9" + i + ", 132, 0.2)");
 			borderColor.add("rgb(255, 9" + i + ", 132)");
 			labels.add(p.getMarqueproduit());
