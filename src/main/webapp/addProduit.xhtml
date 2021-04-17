@@ -17,40 +17,41 @@
 		<p:layoutUnit id="layoutcenter" position="center">
 			<h1>Ajouter un produit</h1>
 			<h:form>
+				<p:panel>
+					<p:growl></p:growl>
 
-				<p:growl></p:growl>
+					<h:panelGrid columns="2">
 
-				<h:panelGrid columns="2">
+						<h:outputText value="id produit" />
+						<p:inputText value="#{produitMBean.produit.idproduit}"></p:inputText>
 
-					<h:outputText value="id produit" />
-					<p:inputText value="#{produitMBean.produit.idproduit}"></p:inputText>
+						<h:outputText value="categorie" />
+						<p:selectOneMenu value="#{produitMBean.produit.categorie.idcateg}">
+							<f:selectItems value="#{categorieMBean.listCategorie}"
+								var="categorie" itemLabel="#{categorie.libellecateg}"
+								itemValue="#{categorie.idcateg}"></f:selectItems>
+						</p:selectOneMenu>
 
-					<h:outputText value="categorie" />
-					<p:selectOneMenu value="#{produitMBean.produit.categorie.idcateg}">
-						<f:selectItems value="#{categorieMBean.listCategorie}"
-							var="categorie" itemLabel="#{categorie.libellecateg}"
-							itemValue="#{categorie.idcateg}"></f:selectItems>
-					</p:selectOneMenu>
+						<h:outputText value="design" />
+						<p:inputText value="#{produitMBean.produit.designproduit}"></p:inputText>
 
-					<h:outputText value="design" />
-					<p:inputText value="#{produitMBean.produit.designproduit}"></p:inputText>
+						<h:outputText value="prix unitaire" />
+						<p:inputText value="#{produitMBean.produit.puproduit}"></p:inputText>
 
-					<h:outputText value="prix unitaire" />
-					<p:inputText value="#{produitMBean.produit.puproduit}"></p:inputText>
+						<h:outputText value="quantité" />
+						<p:inputText value="#{produitMBean.produit.qteproduit}"></p:inputText>
 
-					<h:outputText value="quantité" />
-					<p:inputText value="#{produitMBean.produit.qteproduit}"></p:inputText>
+						<h:outputText value="marque" />
+						<p:inputText value="#{produitMBean.produit.marqueproduit}"></p:inputText>
 
-					<h:outputText value="marque" />
-					<p:inputText value="#{produitMBean.produit.marqueproduit}"></p:inputText>
+						<h:outputText value="model" />
+						<p:inputText value="#{produitMBean.produit.modelproduit}"></p:inputText>
 
-					<h:outputText value="model" />
-					<p:inputText value="#{produitMBean.produit.modelproduit}"></p:inputText>
+						<h:commandButton actionListener="#{produitMBean.addProduit}"
+							value="Ajouter"></h:commandButton>
 
-					<h:commandButton actionListener="#{produitMBean.addProduit}"
-						value="Ajouter"></h:commandButton>
-
-				</h:panelGrid>
+					</h:panelGrid>
+				</p:panel>
 			</h:form>
 		</p:layoutUnit>
 	</p:layout>
