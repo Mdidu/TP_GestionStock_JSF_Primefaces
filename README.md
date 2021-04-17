@@ -18,7 +18,7 @@ Page de connexion :
 Page accessible à tous 
 
 - Ajout produit
--![image](https://user-images.githubusercontent.com/56021893/115106703-962dda00-9f66-11eb-9ac8-6b2d2e57e0ac.png)
+-![image](https://user-images.githubusercontent.com/56021893/115107027-a941a980-9f68-11eb-9d0e-66d02984e247.png)
 
 -Liste des produit trié par désignation
 ![image](https://user-images.githubusercontent.com/56021893/115106774-e2791a00-9f66-11eb-81a1-0b7e2d9cb1d6.png)
