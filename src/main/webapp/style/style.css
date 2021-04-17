@@ -3,17 +3,41 @@
 #menu ul li {
 	display: inline;
 	padding-left: 3%;
-		}
+}
+
 ul {
 	text-align: center;
 }
+
+h1 {
+	font-size: 20px;
+	text-align: center;
+}
+
+form {
+	width: 35%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.chart {
+	width: 100%;
+	height: 500px;
+}
+
 .item-border {
 	border-right: 1px solid black;
 	padding-right: 3%;
-		}
+}
+
 #layoutcenter {
 	text-align: center;
 }
+
 #copyright {
 	float: right;
+}
+
+.formSize100 {
+	width: 100%;
 }

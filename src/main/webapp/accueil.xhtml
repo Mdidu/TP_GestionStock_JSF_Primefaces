@@ -7,13 +7,19 @@
 
 
 <h:head>
-<link rel="stylesheet" href="style.css"></link>
+	<link rel="stylesheet" href="style/style.css"></link>
 </h:head>
 <h:body>
 
 	<p:layout fullPage="true">
-		<ui:include src="layoutUnitMenu.xhtml"/>
-		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
+
+		<ui:include src="layoutUnitMenu.xhtml" />
+
+		<p:layoutUnit id="layoutcenter" position="center">
+			<h1>Bienvenue sur notre site</h1>
+			
+			<p>Vous êtes maintenant connecté !</p>
+			
 		</p:layoutUnit>
 	</p:layout>
 

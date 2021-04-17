@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
 import persistence.dao.UserDao;
 import persistence.dao.UserDaoImpl;
@@ -23,6 +24,16 @@ public class UserMBean {
 	private Stockuser selectedUser = new Stockuser();
 	UserDao userDao = new UserDaoImpl();
 	private List<Stockuser> listUsers = new ArrayList<Stockuser>();
+	private String test = "test";
+	
+	
+	public String getTest() {
+		return test;
+	}
+
+	public void setTest(String test) {
+		this.test = test;
+	}
 
 	public Stockuser getUser() {
 		return user;
@@ -55,7 +66,7 @@ public class UserMBean {
 		user.setRole(role);
 		userDao.add(user);
 		user = new Stockuser();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectu� avec succ�s"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succès"));
 	}
 	
 	public void deleteUser(ActionEvent e) {
@@ -63,7 +74,7 @@ public class UserMBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention" ,"Aucun utilisateur n'a été sélectionné !"));
 		} else {
 			userDao.delete(selectedUser);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppresion effectué avec succ�s"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppresion effectué avec succès"));
 		}
 	}
 	
@@ -73,12 +84,23 @@ public class UserMBean {
 	
 	public void updateUser(ActionEvent e) {
 		userDao.update(selectedUser);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succ�s"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succès"));
 	}
 
 	public String login() {
-		if(userDao.findUserByLoginAndPassword(user.getLogin(),user.getPassword()) != null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Connexion effectu� avec succ�s"));
+		
+		Stockuser userLog = userDao.findUserByLoginAndPassword(user.getLogin(),user.getPassword());
+		
+		if(userLog != null) {
+			HttpSession session = SessionUtils.getSession();
+			
+			
+			BigDecimal userLogId = userLog.getRole().getIdrole();
+			String userLogNom = userLog.getLogin();
+			
+			session.setAttribute("id", userLogId);
+			session.setAttribute("nom", userLogNom);
+
 			return "accueil.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Utilisateur inexistant"));

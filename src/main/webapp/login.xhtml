@@ -11,29 +11,31 @@
 <h:body>
 
 	<p:layout fullPage="true">
-	
+
 		<ui:include src="layoutUnitMenu.xhtml" />
-		
-		<p:layoutUnit position="center" id="layoutUnit-center">
-			<h2>Connexion</h2>
-			
+
+		<p:layoutUnit position="center" id="layoutcenter">
+			<h1>Connexion</h1>
+
 			<h:form>
 				<p:growl showDetail="true"></p:growl>
-				
+
 				<p:panel header="Authentification">
-				
+
 					<p:panelGrid columns="2">
 						<h:outputText value="Login" />
-						<p:inputText value="#{userMBean.user.login}" required="true" requiredMessage="Champ obligatoire"/>
-						
+						<p:inputText value="#{userMBean.user.login}" required="true"
+							requiredMessage="Champ obligatoire" />
+
 						<h:outputText value="Password" />
-						<p:password value="#{userMBean.user.password}" required="true" requiredMessage="Champ obligatoire" />
-						<h:commandButton value="Login" action="#{userMBean.login}"/>
+						<p:password value="#{userMBean.user.password}" required="true"
+							requiredMessage="Champ obligatoire" />
+						<h:commandButton value="Login" action="#{userMBean.login}" />
 						<h:commandButton type="reset" value="Annuler" />
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
-			
+
 		</p:layoutUnit>
 	</p:layout>
 </h:body>

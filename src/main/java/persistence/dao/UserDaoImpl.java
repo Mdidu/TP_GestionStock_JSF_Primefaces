@@ -65,7 +65,6 @@ public class UserDaoImpl implements UserDao {
 		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
 			Criteria criteria = session.createCriteria(Stockuser.class);
-			
 			Criterion criterionLogin = Restrictions.eq("login", login);
 			Criterion criterionPassword = Restrictions.eq("password", password);
 			criteria.add(criterionLogin);

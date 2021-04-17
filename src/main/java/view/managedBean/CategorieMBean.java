@@ -17,53 +17,65 @@ import persistence.entities.Categorie;
 @ManagedBean
 @SessionScoped
 public class CategorieMBean {
-	 
+
 	private Categorie categorie = new Categorie();
 	private Categorie selectedCategorie = new Categorie();
 	CategorieDao catedao = new CategorieDaoImpl();
 	private List<Categorie> listCategorie = new ArrayList<Categorie>();
-	
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
+
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+
 	public Categorie getSelectedCategorie() {
 		return selectedCategorie;
 	}
+
 	public void setSelectedCategorie(Categorie selectedCategorie) {
 		this.selectedCategorie = selectedCategorie;
 	}
+
 	public List<Categorie> getListCategorie() {
 		listCategorie = catedao.findAll();
 		return listCategorie;
 	}
+
 	public void setListCategorie(List<Categorie> listCategorie) {
 		this.listCategorie = listCategorie;
 	}
+
 	public void addCategorie(ActionEvent e) {
 		catedao.add(categorie);
 		categorie = new Categorie();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succés"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectuÃ© avec succÃ¨s"));
 	}
+
 	public void deleteCategorie(ActionEvent e) {
-		if(selectedCategorie==null  || selectedCategorie.getIdcateg()== new BigDecimal(0))
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attention", "Aucune categorie sélectionné"));
-		else {
+		if (selectedCategorie == null || selectedCategorie.getIdcateg() == new BigDecimal(0)) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucune categorie sÃ©lectionnÃ©"));
+		} else {
 			catedao.delete(selectedCategorie);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectué avec succés"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectuÃ© avec succÃ¨s"));
 		}
 	}
+
 	public String editCategorie() {
-		if(selectedCategorie==null  || selectedCategorie.getIdcateg()== new BigDecimal(0)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attention", "Aucune categorie sélectionné"));
-			return "shoxCategorie.xhtml";
-		} else
+		if (selectedCategorie == null || selectedCategorie.getIdcateg() == new BigDecimal(0)) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucune categorie sÃ©lectionnÃ©"));
+			return "showCategorie.xhtml";
+		} else {
 			return "editCategorie.xhtml";
+		}
 	}
+
 	public void updateCategorie(ActionEvent e) {
 		catedao.update(selectedCategorie);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succés"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectuÃ© avec succÃ¨s"));
 	}
 }

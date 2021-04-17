@@ -79,7 +79,7 @@ public class CommandeDaoImpl implements CommandeDao {
 		return listCommande;
 	}
 	
-	public List<Commande> findByProduid(Produit produit) {
+	public List<Commande> findByProduit(Produit produit) {
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		Criteria crt = s.createCriteria(Commande.class);
 		Criterion crt1 = Restrictions.eq("produit", produit);

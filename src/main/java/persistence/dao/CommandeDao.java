@@ -12,6 +12,6 @@ public interface CommandeDao extends GlobalDao<Commande> {
 	
 	List<Commande> findByEtat(BigDecimal etat);
 	List<Commande> findByDate(Date dateDebut, Date dateFin);
-	public List<Commande> findByProduid(Produit produit);
+	public List<Commande> findByProduit(Produit produit);
 	
 }

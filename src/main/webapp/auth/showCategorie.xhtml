@@ -5,20 +5,22 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-
-<h:head><link rel="stylesheet" href="style.css"></link></h:head>
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../style/style.css"></link>
+</h:head>
 <h:body>
 
 	<p:layout fullPage="true">
-		
-		<ui:include src="layoutUnitMenu.xhtml" />
-		
-		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
-			<h:form>
-			 <p:growl showDetail="true"></p:growl>
+
+		<ui:include src="layoutUnitMenuAdmin.xhtml" />
+
+		<p:layoutUnit position="center" id="layoutcenter">
+			<h1>Liste des catégories</h1>
+			<h:form class="formSize100">
+				<p:growl showDetail="true"></p:growl>
 				<p:dataTable value="#{categorieMBean.listCategorie}" var="categorie"
-					selection="#{categorieMBean.selectedCategorie}" selectionMode="single"
-					rowKey="#{categorie.idcateg}">
+					selection="#{categorieMBean.selectedCategorie}"
+					selectionMode="single" rowKey="#{categorie.idcateg}">
 
 					<p:column headerText="Id Categorie">
 						<h:outputText value="#{categorie.idcateg}" />
@@ -29,11 +31,11 @@
 					<p:column headerText="Libellé">
 						<h:outputText value="#{categorie.libellecateg}" />
 					</p:column>
-					
-					
+
+
 					<p:column headerText="Supprimer">
-						<h:commandButton actionListener="#{categorieMBean.deleteCategorie}"
-							value="Suppr" />
+						<h:commandButton
+							actionListener="#{categorieMBean.deleteCategorie}" value="Suppr" />
 					</p:column>
 					<p:column headerText="Editer">
 						<h:commandButton action="#{categorieMBean.editCategorie()}"

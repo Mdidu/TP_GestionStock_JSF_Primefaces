@@ -6,18 +6,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="style/style.css"></link>
+	<link rel="stylesheet" type="text/css" href="../style/style.css"></link>
 </h:head>
 <h:body>
 
 	<p:layout fullPage="true">
-	
-		<ui:include src="layoutUnitMenu.xhtml" />
-		
-		<p:layoutUnit position="center" id="layoutUnit-center">
+
+		<ui:include src="layoutUnitMenuAdmin.xhtml" />
+
+		<p:layoutUnit position="center" id="layoutcenter">
 			<h1>Liste des utilisateurs</h1>
-			<h:form>
-			 <p:growl showDetail="true"></p:growl>
+			<h:form class="formSize100">
+				<p:growl showDetail="true"></p:growl>
 				<p:dataTable value="#{userMBean.listUsers}" var="user"
 					selection="#{userMBean.selectedUser}" selectionMode="single"
 					rowKey="#{user.iduser}">
@@ -25,18 +25,17 @@
 					<p:column headerText="Login">
 						<h:outputText value="#{user.login}" />
 					</p:column>
-					
+
 					<p:column headerText="Rôle">
 						<h:outputText value="#{user.role.typerole}" />
 					</p:column>
-					
+
 					<p:column headerText="Supprimer">
 						<h:commandButton actionListener="#{userMBean.deleteUser}"
 							value="Suppr" />
 					</p:column>
 					<p:column headerText="Editer">
-						<h:commandButton action="#{userMBean.editUser}"
-							value="Edit" />
+						<h:commandButton action="#{userMBean.editUser}" value="Edit" />
 					</p:column>
 				</p:dataTable>
 			</h:form>

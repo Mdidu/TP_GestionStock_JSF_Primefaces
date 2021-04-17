@@ -18,38 +18,37 @@ import persistence.entities.Role;
 @ManagedBean
 @SessionScoped
 public class ClientMBean {
-	
+
 	private Client client = new Client();
 	private Client selectedClient = new Client();
 	ClientDao clidao = new ClientDaoImpl();
 	private List<Client> listClient = new ArrayList<Client>();
 	private String valeurRecherche;
 	private String critereRecherche;
-	
+
 	public ClientMBean() {
 		this.listClient = clidao.findAll();
 	}
-	
-    public String getCritereRecherche() {
-        return critereRecherche;
-    }
 
-    public void setCritereRecherche(String text2) {
-        this.critereRecherche = text2;
-    }
-    
-    public void renvoi(ActionEvent e) {
-    	if (critereRecherche.equalsIgnoreCase("0") || critereRecherche==null)
-    		this.listClient = clidao.findAll();
-    	else if (critereRecherche.equalsIgnoreCase("1")) 
-    		this.listClient = clidao.findByNom(valeurRecherche);
-    	else if (critereRecherche.equalsIgnoreCase("2")) 
-    		this.listClient = clidao.findByPrenom(valeurRecherche);
-    	critereRecherche=null;
-    	valeurRecherche=null;
-    }
-	
-	
+	public String getCritereRecherche() {
+		return critereRecherche;
+	}
+
+	public void setCritereRecherche(String text2) {
+		this.critereRecherche = text2;
+	}
+
+	public void renvoi(ActionEvent e) {
+		if (critereRecherche.equalsIgnoreCase("0") || critereRecherche == null)
+			this.listClient = clidao.findAll();
+		else if (critereRecherche.equalsIgnoreCase("1"))
+			this.listClient = clidao.findByNom(valeurRecherche);
+		else if (critereRecherche.equalsIgnoreCase("2"))
+			this.listClient = clidao.findByPrenom(valeurRecherche);
+		critereRecherche = null;
+		valeurRecherche = null;
+	}
+
 	public String getValeurRecherche() {
 		return valeurRecherche;
 	}
@@ -61,43 +60,52 @@ public class ClientMBean {
 	public Client getSelectedClient() {
 		return selectedClient;
 	}
+
 	public void setSelectedClient(Client selectedClient) {
 		this.selectedClient = selectedClient;
 	}
-	
+
 	public List<Client> getListClient() {
 		return listClient;
 	}
+
 	public void setListClient(List<Client> listClient) {
 		this.listClient = listClient;
 	}
+
 	public Client getClient() {
 		return client;
 	}
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
 	public void addClient(ActionEvent e) {
 		Role role = new Role();
 		role.setIdrole(new BigDecimal(2));
 		client.getStockuser().setRole(role);
 		clidao.add(client);
 		client = new Client();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectué avec succés"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout effectuÃ© avec succÃ¨s"));
 	}
+
 	public void deleteClient(ActionEvent e) {
-		if(selectedClient==null  || selectedClient.getIdclient()== new BigDecimal(0))
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Attention", "Aucun  client sélectionné"));
+		if (selectedClient == null || selectedClient.getIdclient() == new BigDecimal(0))
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attention", "Aucun  client sÃ©lectionnÃ©"));
 		else {
 			clidao.delete(selectedClient);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectué avec succés"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Suppression effectuÃ© avec succÃ¨s"));
 		}
 	}
+
 	public String editClient() {
 		return "editClient.xhtml";
 	}
+
 	public void updateClient(ActionEvent e) {
 		clidao.update(selectedClient);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectué avec succés"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification effectuÃ© avec succÃ¨s"));
 	}
 }

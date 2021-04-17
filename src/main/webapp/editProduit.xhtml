@@ -1,52 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"> 
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head><link rel="stylesheet" href="style.css"></link></h:head> 
-<h:body> 
+<h:head>
+	<link rel="stylesheet" href="style/tyle.css"></link>
+</h:head>
+<h:body>
 
 	<p:layout fullPage="true">
-		
+
 		<ui:include src="layoutUnitMenu.xhtml" />
-		
-		<p:layoutUnit id="layoutcenter" position="center" style="width:200; border-width:0px;">
-<h:form>
 
-		<p:growl></p:growl>
+		<p:layoutUnit id="layoutcenter" position="center">
+			<h1>Modifier le produit</h1>
+			<h:form>
 
-		<h:panelGrid columns="2">
+				<p:growl></p:growl>
 
-			<h:outputText value="id produit" />
-			<h:outputText value="#{produitMBean.selectedProduit.idproduit}"></h:outputText>
+				<h:panelGrid columns="2">
 
-			<h:outputText value="categorie" />
-			<p:inputText value="#{produitMBean.selectedProduit.categorie.libellecateg}"></p:inputText>
-			
-			
-			<h:outputText value="design produit" />
-			<p:inputText value="#{produitMBean.selectedProduit.designproduit}"></p:inputText>
-			
-			<h:outputText value="prix unitaire produit" />
-			<p:inputText value="#{produitMBean.selectedProduit.puproduit}"></p:inputText>
-			
-			<h:outputText value="quantité produit" />
-			<p:inputText value="#{produitMBean.selectedProduit.qteproduit}"></p:inputText>
-			
-			<h:outputText value="marque produit" />
-			<p:inputText value="#{produitMBean.selectedProduit.marqueproduit}"></p:inputText>
-			
-			<h:outputText value="model produit" />
-			<p:inputText value="#{produitMBean.selectedProduit.modelproduit}"></p:inputText>
+					<h:outputText value="id produit" />
+					<h:outputText value="#{produitMBean.selectedProduit.idproduit}"></h:outputText>
 
-			<h:commandButton actionListener="#{produitMBean.updateProduit}"
-				value="Modifier"></h:commandButton>
+					<h:outputText value="categorie" />
+					<p:inputText
+						value="#{produitMBean.selectedProduit.categorie.libellecateg}"></p:inputText>
 
-		</h:panelGrid>
-	</h:form>
-	</p:layoutUnit>
+
+					<h:outputText value="design produit" />
+					<p:inputText value="#{produitMBean.selectedProduit.designproduit}"></p:inputText>
+
+					<h:outputText value="prix unitaire produit" />
+					<p:inputText value="#{produitMBean.selectedProduit.puproduit}"></p:inputText>
+
+					<h:outputText value="quantité produit" />
+					<p:inputText value="#{produitMBean.selectedProduit.qteproduit}"></p:inputText>
+
+					<h:outputText value="marque produit" />
+					<p:inputText value="#{produitMBean.selectedProduit.marqueproduit}"></p:inputText>
+
+					<h:outputText value="model produit" />
+					<p:inputText value="#{produitMBean.selectedProduit.modelproduit}"></p:inputText>
+
+					<h:commandButton actionListener="#{produitMBean.updateProduit}"
+						value="Modifier"></h:commandButton>
+
+				</h:panelGrid>
+			</h:form>
+		</p:layoutUnit>
 	</p:layout>
 </h:body>
 </html>
