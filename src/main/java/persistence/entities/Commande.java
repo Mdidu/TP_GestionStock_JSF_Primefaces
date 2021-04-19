@@ -1,5 +1,5 @@
 package persistence.entities;
-// Generated 15 avr. 2021 à 11:09:42 by Hibernate Tools 4.0.1.Final
+// Generated 15 avr. 2021 ï¿½ 11:09:42 by Hibernate Tools 4.0.1.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -53,7 +53,7 @@ public class Commande implements java.io.Serializable {
 			@AttributeOverride(name = "idclient", column = @Column(name = "IDCLIENT", nullable = false, precision = 22, scale = 0)),
 			@AttributeOverride(name = "idproduit", column = @Column(name = "IDPRODUIT", nullable = false, precision = 22, scale = 0)) })
 	public CommandeId getId() {
-		this.id = new CommandeId(this.produit.getIdproduit(), client.getIdclient());
+		this.id = new CommandeId(this.client.getIdclient(), this.produit.getIdproduit());
 		return this.id;
 	}
 

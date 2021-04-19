@@ -17,9 +17,9 @@ public class CommandeId implements java.io.Serializable {
 	public CommandeId() {
 	}
 
-	public CommandeId(BigDecimal idproduit, BigDecimal idclient) {
-		this.idproduit = idproduit;
+	public CommandeId(BigDecimal idclient, BigDecimal idproduit) {
 		this.idclient = idclient;
+		this.idproduit = idproduit;
 	}
 
 	@Column(name = "IDCLIENT", nullable = false, precision = 22, scale = 0)
