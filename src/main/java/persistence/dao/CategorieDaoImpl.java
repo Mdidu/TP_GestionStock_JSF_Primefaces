@@ -14,46 +14,46 @@ public class CategorieDaoImpl implements CategorieDao {
 	
 	@Override
 	public void add(Categorie categorie) {
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            tx = session.beginTransaction();
-            session.save(categorie);
-            tx.commit();
-        }
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.save(categorie);
+        tx.commit();
+        session.close();
 	}
 
 	@Override
 	public void delete(Categorie categorie) {
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            tx = session.beginTransaction();
-            session.delete(categorie);
-            tx.commit();
-        }
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.delete(categorie);
+        tx.commit();
+        session.close();
 	}
 
 	@Override
 	public void update(Categorie categorie) {
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
-            session.update(categorie);
-            tx.commit();
-        }
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.update(categorie);
+        tx.commit();
+        session.close();
 	}
 
 	@Override
 	public List<Categorie> findAll() {
-		List<Categorie> listCategorie = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            listCategorie = session.createQuery("from Categorie").list();
-        }
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Categorie> listCategorie = session.createQuery("from Categorie").list();
+        session.close();
         return listCategorie;
 	}
 
 	@Override
 	public Categorie findById(Serializable object) {
-		Categorie categorie = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            categorie = session.get(Categorie.class,(int) object);
-        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Categorie categorie = session.get(Categorie.class,(int) object);
+        session.close();
         return categorie;
 	}
 

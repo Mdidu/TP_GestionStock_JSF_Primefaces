@@ -18,83 +18,80 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public void add(Client client) {
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			tx = session.beginTransaction();
-			session.save(client);
-			tx.commit();
-		}
+		tx = session.beginTransaction();
+		session.save(client);
+		tx.commit();
+		session.close();
 	}
 
 	@Override
 	public void delete(Client client) {
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			tx = session.beginTransaction();
-			session.delete(client);
-			tx.commit();
-		}
-
+		tx = session.beginTransaction();
+		session.delete(client);
+		tx.commit();
+		session.close();
 	}
 
 	@Override
 	public void update(Client client) {
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			tx = session.beginTransaction();
-			session.update(client);
-			tx.commit();
-		}
+		tx = session.beginTransaction();
+		session.update(client);
+		tx.commit();
+		session.close();
 
 	}
 
 	@Override
 	public List<Client> findAll() {
-		List<Client> listeClient = null;
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			listeClient = session.createQuery("from Client").list();
-		}
+		List<Client> listeClient = session.createQuery("from Client").list();
+		session.close();
 		return listeClient;
 	}
 
 	@Override
 	public Client findById(Serializable idclient) {
-		Client client = null;
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			client = session.get(Client.class, (int) idclient);
-		}
+		Client client = session.get(Client.class, (int) idclient);
+		session.close();
 		return client;
 	}
 
 	public List<Client> findByNom(String nomclient) {
-		List<Client> listClient = null;
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			Criteria criteria = session.createCriteria(Client.class);
-			Criterion criterion = Restrictions.eq("nomclient", nomclient);
-			criteria.add(criterion);
-			listClient = criteria.list();
-		}
+		Criteria criteria = session.createCriteria(Client.class);
+		Criterion criterion = Restrictions.eq("nomclient", nomclient);
+		criteria.add(criterion);
+		List<Client> listClient = criteria.list();
+		session.close();
+
 		return listClient;
 	}
 
 	public List<Client> findByPrenom(String prenomclient) {
-		List<Client> listClient = null;
 
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			Criteria criteria = session.createCriteria(Client.class);
-			Criterion criterion = Restrictions.eq("prenomclient", prenomclient);
-			criteria.add(criterion);
-			listClient = criteria.list();
-		}
+		Criteria criteria = session.createCriteria(Client.class);
+		Criterion criterion = Restrictions.eq("prenomclient", prenomclient);
+		criteria.add(criterion);
+		List<Client> listClient = criteria.list();
+		session.close();
+
 
 		return listClient;
 	}

@@ -23,10 +23,10 @@ public class EtatDaoImpl implements EtatDao {
 
 	@Override
 	public List<Etat> findAll() {
-		List<Etat> listEtat = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            listEtat = session.createQuery("from Etat").list();
-        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Etat> listEtat = session.createQuery("from Etat").list();
+        session.close();
         return listEtat;
 	}
 

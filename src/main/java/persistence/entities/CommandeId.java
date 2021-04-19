@@ -1,5 +1,5 @@
 package persistence.entities;
-// Generated 15 avr. 2021 à 11:09:42 by Hibernate Tools 4.0.1.Final
+// Generated 15 avr. 2021 ï¿½ 11:09:42 by Hibernate Tools 4.0.1.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -17,9 +17,9 @@ public class CommandeId implements java.io.Serializable {
 	public CommandeId() {
 	}
 
-	public CommandeId(BigDecimal idclient, BigDecimal idproduit) {
-		this.idclient = idclient;
+	public CommandeId(BigDecimal idproduit, BigDecimal idclient) {
 		this.idproduit = idproduit;
+		this.idclient = idclient;
 	}
 
 	@Column(name = "IDCLIENT", nullable = false, precision = 22, scale = 0)

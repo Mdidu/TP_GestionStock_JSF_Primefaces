@@ -23,96 +23,89 @@ public class CommandeDaoImpl implements CommandeDao {
 	@Override
 	public void add(Commande commande) {
 		
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
-			tx = session.beginTransaction(); 
-			session.save(commande);
-			tx.commit();
-		}
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.save(commande);
+        tx.commit();
+        session.close();
 	}
 
 	@Override
 	public void delete(Commande commande) {
 		
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
-			tx = session.beginTransaction(); 
-			session.delete(commande);
-			tx.commit();
-		}
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.delete(commande);
+        tx.commit();
+        session.close();
 		
 	}
 
 	@Override
 	public void update(Commande commande) {
 		
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
-			tx = session.beginTransaction(); 
-			session.update(commande);
-			tx.commit();
-		}
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.update(commande);
+        tx.commit();
+        session.close();
 	}
 
 	@Override
 	public List<Commande> findAll() {
-		List<Commande> listeCommande = null;
 		
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 				
-			listeCommande = session.createQuery("from Commande").list();
-		}
+		List<Commande> listeCommande = session.createQuery("from Commande").list();
+		session.close();
 		return listeCommande;
 	}
 
 	@Override
 	public Commande findById(Serializable commande) {
-		Commande cmd = null;
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-			cmd = session.get(Commande.class,(CommandeId) commande);
-		}
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Commande cmd = session.get(Commande.class,(CommandeId) commande);
+		session.close();
 		return cmd;
 	}
 
 	@Override
 	public List<Commande> findByEtat(BigDecimal idetat) {
 		Etat etat = new Etat(idetat);
-		List<Commande> listCommande = null;
 		
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 				
-			Criteria criteria = session.createCriteria(Commande.class);
-			Criterion criterion = Restrictions.eq("etat", etat);
-			criteria.add(criterion);
-			listCommande = criteria.list();
-		}
+		Criteria criteria = session.createCriteria(Commande.class);
+		Criterion criterion = Restrictions.eq("etat", etat);
+		criteria.add(criterion);
+		List<Commande> listCommande = criteria.list();
+		session.close();
 		return listCommande;
 	}
 	
 	public List<Commande> findByProduit(Produit produit) {
-		List<Commande> listCommande = null;
 		
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			Criteria criteria = session.createCriteria(Commande.class);
-			Criterion criterion = Restrictions.eq("produit", produit);
-			criteria.add(criterion);
-			listCommande = criteria.list();
-		}
+		Criteria criteria = session.createCriteria(Commande.class);
+		Criterion criterion = Restrictions.eq("produit", produit);
+		criteria.add(criterion);
+		List<Commande> listCommande = criteria.list();
+		session.close();
 		return listCommande;
 	}
 	
 	@Override
 	public List<Commande> findByDate(Date dateDebut,Date dateFin) {
 		
-		List<Commande> listCommande = null;
-		try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			Criteria criteria = session.createCriteria(Commande.class);
-			Criterion criterion = Restrictions.between("datecommande", dateDebut, dateFin);
-			criteria.add(criterion);
-			listCommande = criteria.list();
-		}
+		Criteria criteria = session.createCriteria(Commande.class);
+		Criterion criterion = Restrictions.between("datecommande", dateDebut, dateFin);
+		criteria.add(criterion);
+		List<Commande> listCommande = criteria.list();
+		session.close();
 		return listCommande;
 	}
 }
